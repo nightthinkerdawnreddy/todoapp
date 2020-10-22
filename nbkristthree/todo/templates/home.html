@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" '{% url 'home' %}>
+    {% csrf_token %}
+<input type="text" name="task" placeholder="add task">
+<input type="submit" value="add" >
+</form>
+<table>
+{% for obj in objs %}
+    {% if obj.complete %}
+    <tr>
+        <td><h1><s>{{obj.task}}</s></h1></td>
+            <td><a href="{% url 'delete' obj.id %}"><button type="button" class="btn btn-primary">delete</button></a></td>
+            <td><a href="{% url 'update' obj.id %}"><button type="button" class="btn btn-danger">update</button></a></td>
+            <td><a href="{% url 'uncomplete' obj.id %}"><button type="button" class="btn btn-warning">complete</button></a></td>
+        </tr>
+    {% else %}
+    <tr>
+    <td><h1>{{obj.task}}</h1></td>
+        <td><a href="{% url 'delete' obj.id %}">delete</a></td>
+        <td><a href="{% url 'update' obj.id %}">update</a></td>
+        <td><a href="{% url 'complete' obj.id %}">complete</a></td>
+    </tr>
+    {% endif %}
+    
+{% endfor %}
+</table>
+{% endblock %}

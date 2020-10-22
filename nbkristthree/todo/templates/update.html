@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" '{% url 'update' key %}'>
+    {% csrf_token %}
+<input type="text" name="task" placeholder="{{obj}}">
+<input type="submit" value="edit" >
+{% endblock %}
